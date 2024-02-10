@@ -1,0 +1,57 @@
+volumes:
+  mysql:
+  sandbox_mysql:
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: sandbox_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootPassword
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: sandbox
+    volumes:
+      - sandbox_mysql:/var/lib/mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  back:
+    container_name: sandbox_back
+    build:
+      context: sandbox-nestjs
+      dockerfile: Dockerfile
+    environment:
+      - TYPE=mysql
+      - USERNAME=user
+      - PASSWORD=password
+      - DATABASE=sandbox
+      - PORT=3306
+      - HOST=db
+    volumes:
+      - "./sandbox-nestjs:/app"
+      - /app/node_modules
+    restart: unless-stopped
+    ports:
+      - "3200:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  front:
+    container_name: sandbox_front
+    build:
+      context: sandbox-nextjs
+      dockerfile: Dockerfile
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://back:3000
+    volumes:
+      - "./sandbox-nextjs:/app/out"
+    restart: unless-stopped
+    ports:
+      - "3100:3000"

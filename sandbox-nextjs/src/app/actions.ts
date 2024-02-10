@@ -8,7 +8,7 @@ const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export const getTasks = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tasks`, {
+    const res = await fetch(`${baseUrl}/tasks`, {
       next: { tags: ["tasks"] },
     });
     return res.json();
