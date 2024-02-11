@@ -10,7 +10,4 @@ COPY . .
 
 RUN yarn build
 
-CMD yarn start:dev && \
-yarn migration:create && \
-yarn migration:generate && \
-yarn migration:up
+CMD yarn start:dev

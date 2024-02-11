@@ -1,6 +1,7 @@
+version: "3"
+
 volumes:
   mysql:
-  sandbox_mysql:
 
 services:
   db:
@@ -12,8 +13,8 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
-      - sandbox_mysql:/var/lib/mysql
-    restart: unless-stopped
+      - mysql:/var/lib/mysql:rw
+    restart: always
     ports:
       - "3306:3306"
     healthcheck:
@@ -36,7 +37,7 @@ services:
     volumes:
       - "./sandbox-nestjs:/app"
       - /app/node_modules
-    restart: unless-stopped
+    restart: always
     ports:
       - "3200:3000"
     depends_on:
@@ -53,6 +54,27 @@ services:
       - NODE_ENV=${NODE_ENV}
     volumes:
       - "./sandbox-nextjs:/app"
-    restart: unless-stopped
+      - /app/node_modules
+    restart: always
     ports:
       - "3100:3000"
+
+  webserver:
+    container_name: sandbox_webserver
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - SERVER_NAME=${SERVER_NAME}
+    restart: always
+    volumes:
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www/:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
