@@ -50,8 +50,9 @@ services:
       dockerfile: Dockerfile
     environment:
       - NEXT_PUBLIC_BACKEND_URL=http://back:3000
+      - NODE_ENV=development
     volumes:
-      - "./sandbox-nextjs:/app/out"
+      - "./sandbox-nextjs:/app"
     restart: unless-stopped
     ports:
       - "3100:3000"
