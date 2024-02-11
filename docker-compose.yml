@@ -7,10 +7,10 @@ services:
     image: mysql:8.0
     container_name: sandbox_mysql
     environment:
-      MYSQL_ROOT_PASSWORD: rootPassword
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: sandbox
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - sandbox_mysql:/var/lib/mysql
     restart: unless-stopped
@@ -27,12 +27,12 @@ services:
       context: sandbox-nestjs
       dockerfile: Dockerfile
     environment:
-      - TYPE=mysql
-      - USERNAME=user
-      - PASSWORD=password
-      - DATABASE=sandbox
-      - PORT=3306
-      - HOST=db
+      - TYPE=${TYPE}
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
+      - DATABASE=${DATABASE}
+      - PORT=${PORT}
+      - HOST=${HOST}
     volumes:
       - "./sandbox-nestjs:/app"
       - /app/node_modules
@@ -49,8 +49,8 @@ services:
       context: sandbox-nextjs
       dockerfile: Dockerfile
     environment:
-      - NEXT_PUBLIC_BACKEND_URL=http://back:3000
-      - NODE_ENV=development
+      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+      - NODE_ENV=${NODE_ENV}
     volumes:
       - "./sandbox-nextjs:/app"
     restart: unless-stopped
