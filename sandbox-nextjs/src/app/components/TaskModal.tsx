@@ -27,9 +27,8 @@ const TaskModal = () => {
   return (
     <div className="absolute top-0 left-0 w-screen h-screen flex flex-col justify-center items-center backdrop-blur-sm">
       <form
-        className="w-1/3 h-1/4 bg-orange-400 rounded-2xl flex flex-col justify-around items-center px-4 border-t-2 border-t-orange-600 border-b-2 border-b-orange-600 shadow-xl"
-        onSubmit={(e) => submit(e)}
-      >
+        className="w-5/6 md:w-1/3 h-1/4 bg-orange-400 rounded-2xl flex flex-col justify-around items-center px-1 md:px-4 border-t-2 border-t-orange-600 border-b-2 border-b-orange-600 shadow-xl"
+        onSubmit={(e) => submit(e)}>
         <h1 className="font-bold">new task</h1>
         <div className="flex justify-between w-4/5">
           <label htmlFor="taskTitle">title:</label>
@@ -62,16 +61,14 @@ const TaskModal = () => {
           <Link href="/todolist">
             <button
               className="w-8 px-1 m-1 z-10 rounded bg-red-600 hover:bg-red-400 text-white"
-              type="button"
-            >
+              type="button">
               &#10007;
             </button>
           </Link>
           <button
             className="w-8 px-1 m-1 rounded bg-green-600 hover:bg-green-400 text-white"
             id="taskSubmit"
-            type="submit"
-          >
+            type="submit">
             &#10003;
           </button>
         </div>
