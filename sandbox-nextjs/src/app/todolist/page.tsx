@@ -18,7 +18,7 @@ const todolist = async ({ searchParams }: TodolistProps) => {
       <div className="absolute top-6 left-10 text-xl text-orange-900">
         <LinkButton text="HOME" path="/" />
       </div>
-      <div className="flex flex-col justify-between text-center w-1/2 h-3/4 bg-orange-400 text-orange-900 rounded-3xl">
+      <div className="flex flex-col justify-between text-center w-5/6 md:w-1/2 h-3/4 bg-orange-400 text-orange-900 rounded-3xl">
         <div className="h-4/5">
           <h1 className="bg-orange-300 text-xl font-bold rounded-tl-3xl rounded-tr-3xl p-4">
             todo-list
