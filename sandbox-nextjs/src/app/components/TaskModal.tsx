@@ -27,7 +27,7 @@ const TaskModal = () => {
   return (
     <div className="absolute top-0 left-0 w-screen h-screen flex flex-col justify-center items-center backdrop-blur-sm">
       <form
-        className="w-5/6 md:w-1/3 h-1/4 bg-orange-400 rounded-2xl flex flex-col justify-around items-center px-1 md:px-4 border-t-2 border-t-orange-600 border-b-2 border-b-orange-600 shadow-xl"
+        className="w-5/6 md:w-1/3 h-2/5 bg-orange-400 rounded-2xl flex flex-col justify-around items-center px-1 md:px-4 border-t-2 border-t-orange-600 border-b-2 border-b-orange-600 shadow-xl"
         onSubmit={(e) => submit(e)}>
         <h1 className="font-bold">new task</h1>
         <div className="flex justify-between w-4/5">

@@ -21,18 +21,15 @@ const TaskCard = ({ task, index }: taskCardProps) => {
   return (
     <div>
       <div
-        className={`flex justify-between w-full pl-6 mt-4 rounded-xl border-2 border-orange-400 border-b-orange-600 border-r-orange-600`}
-      >
+        className={`flex justify-between w-full pl-6 mt-4 rounded-xl border-2 border-orange-400 border-b-orange-600 border-r-orange-600`}>
         <div
-          className="w-2/3 lg:w-3/4 text-left cursor-pointer"
+          className="w-3/5 md:w-2/3 lg:w-3/4 text-left cursor-pointer"
           role="button"
-          onClick={() => setIsContentDisplayed(!isContentDisplayed)}
-        >
+          onClick={() => setIsContentDisplayed(!isContentDisplayed)}>
           <span
             className={`font-medium ${
               task.isDone && "opacity-50 line-through"
-            }`}
-          >
+            }`}>
             {`${index + 1} - ${task.title}`}
           </span>
           {task.isDone && <i className="text-green-600 ml-4">&#10003;</i>}
@@ -44,8 +41,7 @@ const TaskCard = ({ task, index }: taskCardProps) => {
               task.isDone && "opacity-50 hover:bg-green-600"
             } rounded bg-green-600 hover:bg-green-400 text-white`}
             onClick={() => updateTask(task)}
-            disabled={task.isDone}
-          >
+            disabled={task.isDone}>
             &#10003;
           </button>
           <button
@@ -53,8 +49,7 @@ const TaskCard = ({ task, index }: taskCardProps) => {
             className="w-6 px-1 m-1 z-10 rounded bg-red-600 hover:bg-red-400 text-white"
             onClick={() => {
               deleteTask(task.id);
-            }}
-          >
+            }}>
             &#10007;
           </button>
         </div>
@@ -65,8 +60,7 @@ const TaskCard = ({ task, index }: taskCardProps) => {
             <div
               className="animate-showTaskContent pt-2"
               role="button"
-              onClick={() => setIsContentDisplayed(!isContentDisplayed)}
-            >
+              onClick={() => setIsContentDisplayed(!isContentDisplayed)}>
               <span>{task.content}</span>
             </div>
           </div>
