@@ -4,6 +4,7 @@ import { moduleList } from "./consts";
 
 const Home = () => {
   revalidateTag("tasks");
+  console.log("coucou");
 
   return (
     <div className="flex justify-center items-center w-screen h-screen bg-emerald-950">
